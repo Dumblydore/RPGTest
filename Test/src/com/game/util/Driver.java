@@ -1,9 +1,14 @@
+package com.game.util;
+
+import com.game.character.Enemy;
+import com.game.character.Player;
+
 import java.util.Scanner;
 
 public class Driver {
     public static void main(String[] args) {
         System.out.println("Battle!\n type 'a' to attack and 'r' to run!");
-        Enemy enemy = new Enemy(200,20,20,10);
+/*        Enemy enemy = new Enemy(200,20,20,10);
         Player player = new Player(200,10,20,15);
         Scanner input = new Scanner(System.in);
 
@@ -17,14 +22,14 @@ public class Driver {
                 } else if (command.equals("a")) {
                     if (player.getSpeed() > enemy.getSpeed()) {
                         int damage = enemy.damaged(player.attack());
-                        System.out.println("Enemy took " + damage + " damage!");
+                        System.out.println("com.game.character.Enemy took " + damage + " damage!");
                         damage = player.damaged(enemy.attack());
                         System.out.println("player took " + damage + " damage!");
                     } else {
                         int damage = player.damaged(enemy.attack());
                         System.out.println("player took " + damage + " damage!");
                         damage = enemy.damaged(player.attack());
-                        System.out.println("Enemy took " + damage + " damage!");
+                        System.out.println("com.game.character.Enemy took " + damage + " damage!");
                     }
                     if (enemy.getHealth() <= 0) {
                         System.out.println("You won!");
@@ -33,7 +38,7 @@ public class Driver {
                         System.out.println("You lost!");
                         break;
                     }
-                    System.out.println("Player health: " + player.getHealth() + " | Enemy Health: " + enemy.getHealth());
+                    System.out.println("com.game.character.Player health: " + player.getHealth() + " | com.game.character.Enemy Health: " + enemy.getHealth());
 
                 } else {
                     System.out.println("Invalid command!");
@@ -48,5 +53,6 @@ public class Driver {
                 else
                     System.exit(0);
             }
+    }*/
     }
 }
