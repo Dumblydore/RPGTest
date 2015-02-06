@@ -24,7 +24,7 @@ public class Character {
     @Test
     public void damaged() {
         com.game.character.Character character = new com.game.character.Character(0,100,10,10,10,10,10);
-        int actualDamage = character.damaged(100);
+        int actualDamage = character.damaged(100,Attack.ATTACK_TYPE_PHYSICAL);
         int expectedDamage = 90;
         int expectedHealth = 10;
         int actualHealth = character.getHealth();
@@ -32,11 +32,13 @@ public class Character {
         assertEquals(expectedHealth,actualHealth);
     }
 
-    @Ignore
+    @Test
     public void damagedWeakness() {
         String[] weaknesses = new String[1];
         weaknesses[0] = Attack.ATTACK_TYPE_FIRE;
         com.game.character.Character character = new com.game.character.Character(0,100,10,10,10,10,10,weaknesses);
-        Attack testAttack = new Attack(100,Attack.ATTACK_TYPE_FIRE);
+        int expected = 190;
+        int actual = character.damaged(100,Attack.ATTACK_TYPE_FIRE);
+        assertEquals(expected,actual);
     }
 }

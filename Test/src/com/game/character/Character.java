@@ -26,8 +26,8 @@ public class Character {
         this.strength = strength*(level+1);
         this.def = def*(level+1);
         this.magicDef = magicDef*(level+1);
-        
         skills = new Attack[10];
+        weaknesses = new String[0];
 
     }
 
@@ -50,13 +50,22 @@ public class Character {
         return attack;
     }
 
-    public int damaged(int damage) {
+    public int damaged(int damage, String type) {
+        if(checkWeakness(type))
+            damage*=2;
         int totalDamage = damage - def;
         totalDamage = totalDamage <= 0 ? 1 : totalDamage;
         health = health - totalDamage;
         return totalDamage;
     }
 
+    private boolean checkWeakness(String type) {
+        for(String weakness : weaknesses) {
+            if(weakness.equals(type))
+                return true;
+        }
+        return false;
+    }
     public int getSpeed() {
         return speed;
     }
