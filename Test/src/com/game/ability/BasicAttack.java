@@ -10,4 +10,6 @@ public class BasicAttack extends Attack {
     public BasicAttack(String type, int strength) {
         super((int)(strength*.8), type);
     }
+
+
 }

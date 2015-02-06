@@ -6,7 +6,7 @@ import com.game.ability.BasicAttack;
 import java.util.Random;
 
 public class Character {
-    private final int CONSTANT = 15;
+
 
     private int level;
     private int health;
@@ -46,8 +46,15 @@ public class Character {
 
     public int attack() {
         BasicAttack basicAttack = new BasicAttack(Attack.ATTACK_TYPE_PHYSICAL,strength);
-        int attack = (int) ((basicAttack.getBase()) + Math.random() * (strength - (basicAttack.getBase()))) * CONSTANT;
-        return attack;
+        return basicAttack.attack(strength);
+    }
+
+    public int attack(Attack attack){
+        int stat = strength;
+        if(!attack.getType().equals(Attack.ATTACK_TYPE_PHYSICAL)){
+            stat = magic;
+        }
+        return attack.attack(stat);
     }
 
     public int damaged(int damage, String type) {
@@ -66,6 +73,7 @@ public class Character {
         }
         return false;
     }
+
     public int getSpeed() {
         return speed;
     }
@@ -76,5 +84,9 @@ public class Character {
 
     public int getLevel() {
         return level+1;
+    }
+
+    public int getStrength() {
+        return strength;
     }
 }

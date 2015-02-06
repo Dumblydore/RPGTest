@@ -5,6 +5,7 @@ import java.util.Random;
 import static org.junit.Assert.*;
 
 import com.game.ability.Attack;
+import com.game.ability.Skill;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -38,7 +39,21 @@ public class Character {
         weaknesses[0] = Attack.ATTACK_TYPE_FIRE;
         com.game.character.Character character = new com.game.character.Character(0,100,10,10,10,10,10,weaknesses);
         int expected = 190;
-        int actual = character.damaged(100,Attack.ATTACK_TYPE_FIRE);
+        int actual = character.damaged(100, Attack.ATTACK_TYPE_FIRE);
         assertEquals(expected,actual);
+    }
+
+    @Test
+    public void useSkill() {
+        String[] weaknesses = new String[1];
+        weaknesses[0] = Attack.ATTACK_TYPE_FIRE;
+        com.game.character.Character character = new com.game.character.Character(0,100,10,10,10,10,10,weaknesses);
+        Skill skill = new Skill(1.5,Attack.ATTACK_TYPE_PHYSICAL,"Test Attack","Attack to test the skill algorithm");
+        int expectedMinimum = 180;
+        int expectedMaximum = 225;
+        for(int i = 0; i == 100; i++) {
+            int actual = character.attack(skill);
+            assertTrue(expectedMinimum < actual && actual < expectedMaximum);
+        }
     }
 }

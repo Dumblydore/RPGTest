@@ -16,7 +16,7 @@ public class Attack {
     private String type;
     private double base;
 
-    public Attack(int base, String type){
+    public Attack(double base, String type){
         this.type = type;
         this.base = base;
     }
@@ -29,5 +29,9 @@ public class Attack {
         return type;
     }
 
+    public int attack(int stat) {
+        int attack = (int) ((base) + Math.random() * ((base*1.5) - (base))) * stat;
+        return attack;
+    }
 
 }
