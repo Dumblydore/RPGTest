@@ -2,6 +2,8 @@ package com.game.character;
 
 import com.game.ability.Attack;
 import com.game.ability.BasicAttack;
+import com.game.ability.Magic;
+import com.game.ability.Skill;
 
 import java.util.Random;
 
@@ -10,6 +12,7 @@ public class Character {
 
     private int level;
     private int health;
+    private int magicPoints;
     private int magic;
     private int speed;
     private int strength;
@@ -18,14 +21,15 @@ public class Character {
     private Attack[] skills;
     private String[] weaknesses;
 
-    public Character(int level, int health, int magic, int speed, int strength, int def, int magicDef) {
+    public Character(int level, int health, int magic, int speed, int strength, int def) {
         this.level = level;
         this.health = health*(level+1);
         this.magic = magic*(level+1);
         this.speed = speed*(level+1);
         this.strength = strength*(level+1);
         this.def = def*(level+1);
-        this.magicDef = magicDef*(level+1);
+        magicDef = magic/2*(level+1);
+        magicPoints = (magic*5)*(level+1);
         skills = new Attack[10];
         weaknesses = new String[0];
 
@@ -39,6 +43,7 @@ public class Character {
         this.strength = strength*(level+1);
         this.def = def*(level+1);
         this.magicDef = magicDef*(level+1);
+        magicPoints = (magic*5)*(level+1);
         skills = new Attack[10];
         this.weaknesses = weaknesses;
 
@@ -51,16 +56,24 @@ public class Character {
 
     public int attack(Attack attack){
         int stat = strength;
-        if(!attack.getType().equals(Attack.ATTACK_TYPE_PHYSICAL)){
+        if((attack instanceof Magic)){
             stat = magic;
+            magicPoints -= ((Magic)(attack)).getCost();
+        } else if((attack instanceof Skill)){
+            stat = magic;
+            magicPoints -= ((Skill)(attack)).getCost();
         }
         return attack.attack(stat);
     }
 
-    public int damaged(int damage, String type) {
-        if(checkWeakness(type))
+    public int damaged(int damage, Attack attack) {
+        int totalDamage;
+        if(checkWeakness(attack.getType()))
             damage*=2;
-        int totalDamage = damage - def;
+        if(!(attack instanceof Magic))
+            totalDamage = damage - def;
+        else
+            totalDamage = damage - magicDef;
         totalDamage = totalDamage <= 0 ? 1 : totalDamage;
         health = health - totalDamage;
         return totalDamage;
@@ -89,4 +102,6 @@ public class Character {
     public int getStrength() {
         return strength;
     }
+
+    public int getMagicPoints() {return magicPoints; }
 }
