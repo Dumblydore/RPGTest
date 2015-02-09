@@ -83,4 +83,14 @@ public class Character {
         int actual = character.getMagicPoints();
         assertEquals(expected,actual);
     }
+
+    @Test
+    public void setStatus() {
+        com.game.character.Character character = new com.game.character.Character(0, 100, 10, 10, 10, 10, 10, null);
+        String expected = com.game.character.Character.STATUS_POISON;
+        Magic magic = new Magic(1.2,10,Attack.ATTACK_TYPE_AILMENT,"Test Ailment","To test Ailments");
+        character.setStatus(expected,character.attack(magic));
+        String actual = character.getStatus();
+        assertEquals(expected,actual);
+    }
 }
