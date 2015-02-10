@@ -5,20 +5,59 @@ package com.game.item;
  */
 public class Item {
     private String name;
-    private int type;
     private String flavorText;
+    private String effect;
     private int dmg;
     private int count;
+    private int itemCap = 99;
 
-    public Item(String name, int type, String flavorText, int dmg, int count) {
+    public static final String ITEM_TYPE_DAMAGE = "damage";
+    public static final String ITEM_TYPE_HEAL = "heal";
+
+
+    public Item(String name, String flavorText,String effect, int dmg, int count) {
         this.name = name;
-        this.type = type;
         this.flavorText = flavorText;
         this.dmg = dmg;
         this.count = count;
+        this.effect = effect;
     }
 
-    public void use(Character character) {
+    public void add() throws AddItemCapException{
+        if(count + 1 > itemCap)
+            throw new AddItemCapException(""+1);
+        count++;
+    }
 
+    public void add(int c) throws AddItemCapException{
+        if(count + c > itemCap)
+            throw new AddItemCapException(""+(itemCap-(count+c)));
+        count += c;
+    }
+
+    public void remove() {
+        count--;
+    }
+
+    public void remove(int count) {
+        this.count-=count;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public String getEffect(){
+        return effect;
+    }
+
+    public int getDmg() {
+        return dmg;
+    }
+
+    public class AddItemCapException extends Exception {
+        public AddItemCapException(String message) {
+            super(message);
+        }
     }
 }

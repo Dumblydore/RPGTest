@@ -15,4 +15,8 @@
 *.PDF	 diff=astextplain
 *.rtf	 diff=astextplain
 *.RTF	 diff=astextplain
+<<<<<<< HEAD
 .idea/ export-ignore
+=======
+*.idea/ export-ignore
+>>>>>>> origin/master

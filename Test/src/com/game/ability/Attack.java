@@ -12,9 +12,11 @@ public class Attack {
     public static final String ATTACK_TYPE_WIND = "wind";
     public static final String ATTACK_TYPE_DARK = "dark";
     public static final String ATTACK_TYPE_LIGHT = "light";
+    public static final String ATTACK_TYPE_AILMENT = "ailment";
 
     private String type;
     private double base;
+    private String ailmentType;
 
     public Attack(double base, String type){
         this.type = type;
@@ -26,7 +28,13 @@ public class Attack {
     }
 
     public int attack(int stat) {
+        if(type.equals(ATTACK_TYPE_AILMENT))
+            return inflictAilment(stat);
         return (int) (base + (Math.random() * ((base*1.5) - (base)))) * stat;
+    }
+
+    private int inflictAilment(int stat) { //0 = fail 1 = pass
+        return 1;
     }
 
 }

@@ -9,6 +9,10 @@ import java.util.Random;
 
 public class Character {
 
+    public static final String STATUS_POISON = "poison";
+    public static final String STATUS_STUN = "stun";
+    public static final String STATUS_SLEEP = "sleep";
+
 
     private int level;
     private int health;
@@ -18,6 +22,7 @@ public class Character {
     private int strength;
     private int def;
     private int magicDef;
+    private String status;
     private Attack[] skills;
     private String[] weaknesses;
 
@@ -104,4 +109,17 @@ public class Character {
     }
 
     public int getMagicPoints() {return magicPoints; }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String s, int chance) {
+        if (chance == 1)
+            status = s;
+    }
+
+    public void removeStatus() {
+        status = "";
+    }
 }
